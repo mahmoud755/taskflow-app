@@ -48,6 +48,15 @@ jobs:
         run: |
           docker build -t reddit-web:${{ github.sha }} ./app
 
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@v0.20.0
+        with:
+          image-ref: reddit-web:${{ github.sha }}
+          format: 'table'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          exit-code: '0'
+
       - name: List Docker images
         run: docker images | grep reddit-web || true
 
