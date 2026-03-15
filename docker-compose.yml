@@ -1,0 +1,12 @@
+services:
+  reddit-web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: reddit-web
+    image: reddit-web:dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+
